@@ -1,9 +1,9 @@
 package com.daeyun.kotlinjava.controller.response
 
 open class ResponseService {
-    // enum으로 api 요청 결과에 대한 code, message를 정의합니다.
+    // enum 으로 api 요청 결과에 대한 code, message 를 정의
     enum class CommonResponse(var code: Int, var msg: String) {
-        SUCCESS(200, "success.");
+        SUCCESS(200, "success.")
 
     }
 
