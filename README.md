@@ -4,7 +4,7 @@
 - Rest API Response 구조 ( 완료 )
 - ExceptionAdvice 설정
   - MessageSource 적용 
-- JPA , QueryDsl 설정
+- JPA , QueryDsl 설정 ( H2 )
 - 회원 테스트 API 구성
   - 구성 : 회원번호 , 회원아이디 , 회원이름 , 회원비밀번호(암호화 X), 회원상태 (1-정상 , 0 - 탈퇴 ) ,등록일 , 생성일 , 마지막 수정일 
   - API 목록 : 회원 가입,회원 로그인,회원 정보 수정
