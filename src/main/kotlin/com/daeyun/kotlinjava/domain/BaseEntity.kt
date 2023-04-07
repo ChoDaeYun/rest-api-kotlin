@@ -1,18 +1,22 @@
 package com.daeyun.kotlinjava.domain
 
+import jakarta.persistence.Column
+import jakarta.persistence.EntityListeners
+import jakarta.persistence.MappedSuperclass
+import lombok.Getter
 import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
-import javax.persistence.Column
-import javax.persistence.EntityListeners
-import javax.persistence.MappedSuperclass
 
+@Getter
 @MappedSuperclass
 @EntityListeners(value = [AuditingEntityListener::class])
-abstract class BaseEntity {
-
-    //안되네 .. 나중에 보자 ..
+abstract class BaseEntity (
     @CreatedDate
-    @Column(name = "create_date", nullable = false, updatable = false)
-    var createDate: LocalDateTime? = null
-}
+    @Column(name = "create_date",updatable = false)
+    var createDate: LocalDateTime? = null,
+    @LastModifiedDate
+    @Column(name = "update_date")
+    var updateDate: LocalDateTime? = null
+)

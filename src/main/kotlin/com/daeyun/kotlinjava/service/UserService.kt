@@ -29,7 +29,7 @@ class UserService(
         if(userRepository.existsByUserId(dto.id)){
             throw UserExistException()
         }
-        val newUser = User(idx=null,userId = dto.id, userPw = dto.pw, userName = dto.name)
+        val newUser = User(userId = dto.id, userPw = dto.pw, userName = dto.name)
         userRepository.save(newUser)
     }
 
@@ -38,7 +38,7 @@ class UserService(
         if(!userRepository.existsByIdx(idx)){
             throw UserNotFoundException()
         }
-        userRepository.updateUser(idx,dto.name)
+        userRepository.updateUser(idx,dto.name, LocalDateTime.now())
     }
 
 
