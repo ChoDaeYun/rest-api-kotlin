@@ -5,7 +5,6 @@ import com.daeyun.kotlinjava.controller.response.ResponseService
 import com.daeyun.kotlinjava.exception.user.UserException
 import com.daeyun.kotlinjava.exception.user.UserExistException
 import com.daeyun.kotlinjava.exception.user.UserNotFoundException
-import org.hibernate.exception.ConstraintViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
@@ -24,6 +23,16 @@ class ExceptionAdvice : ResponseService() {
         USER_NOT_FOUND(HttpStatus.OK,2002, "user not found ","사용자를 찾을수 없습니다 - User"),
         ENTRYPOINT(HttpStatus.UNAUTHORIZED,1002,"You do not have permission to access this resource","권한 오류"),
         ACCESS_DENIED(HttpStatus.FORBIDDEN,1003,"A resource that can not be accessed with the privileges it has","권한 오류")
+    }
+
+    @ExceptionHandler(value = [AuthenticationEntryPointException::class])
+    fun authenticationEntryPointException(e: AuthenticationEntryPointException): ResponseEntity<CommonResult>  {
+        return ResponseEntity(this.getFailResult(ExceptionCode.ENTRYPOINT.code,ExceptionCode.ENTRYPOINT.msg),ExceptionCode.ENTRYPOINT.status)
+    }
+
+    @ExceptionHandler(value = [AccessDeniedException::class])
+    fun accessDeniedException(e: AccessDeniedException): ResponseEntity<CommonResult>  {
+        return ResponseEntity(this.getFailResult(ExceptionCode.ACCESS_DENIED.code,ExceptionCode.ACCESS_DENIED.msg),ExceptionCode.ACCESS_DENIED.status)
     }
 
     @ExceptionHandler(value = [Exception::class])

@@ -1,3 +1,5 @@
+package com.daeyun.kotlinjava.config.security
+
 import com.daeyun.kotlinjava.service.UserDetailsService
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
@@ -40,7 +42,6 @@ class JwtTokenProvider(
                 .build()
                 .parseClaimsJws(token)
                 .body
-
             var accessToken = claims.get("accessToken").toString()
             var customUserDetails = userDetailsService.loadUserByUsername(accessToken)
             return null

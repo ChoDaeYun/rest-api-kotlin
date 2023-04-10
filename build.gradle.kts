@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.0.5"
+    id("org.springframework.boot") version "2.7.2"
     id("io.spring.dependency-management") version "1.1.0"
-    kotlin("jvm") version "1.7.22"
-    kotlin("plugin.spring") version "1.7.22"
-    kotlin("plugin.jpa") version "1.7.22"
-    kotlin("kapt") version "1.7.22"
+    kotlin("jvm") version "1.6.21"
+    kotlin("plugin.spring") version "1.6.21"
+    kotlin("plugin.jpa") version "1.6.21"
+    kotlin("kapt") version "1.6.21"
 
 }
 apply{
@@ -34,8 +34,8 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
-    // https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
-    implementation("javax.persistence:javax.persistence-api:2.2")
+//    // https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
+//    implementation("javax.persistence:javax.persistence-api:2.2")
 
 
     implementation ("io.jsonwebtoken:jjwt-api:0.11.2")
@@ -45,7 +45,7 @@ dependencies {
 
     //querydsl
     implementation("com.querydsl:querydsl-jpa:$querydslVersion")
-    kapt("com.querydsl:querydsl-apt:$querydslVersion:jakarta")
+    kapt("com.querydsl:querydsl-apt:$querydslVersion:jpa")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
