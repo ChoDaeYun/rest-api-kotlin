@@ -2,6 +2,8 @@ package com.daeyun.kotlinjava.service
 
 import com.daeyun.kotlinjava.domain.user.User
 import com.daeyun.kotlinjava.domain.user.UserRepository
+import com.daeyun.kotlinjava.domain.usertoken.UserToken
+import com.daeyun.kotlinjava.domain.usertoken.UserTokenRepository
 import com.daeyun.kotlinjava.dto.user.UserCreateReq
 import com.daeyun.kotlinjava.dto.user.UserLoginReq
 import com.daeyun.kotlinjava.dto.user.UserUpdateReq
@@ -14,11 +16,13 @@ import java.time.LocalDateTime
 
 @Service
 class UserService(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val userTokenRepository: UserTokenRepository,
+    private val userDetailsService: UserDetailsService
 ) {
 
     @Transactional
-    fun getUser(idx:Long): User {
+    fun getUser(idx: Long): User {
         var optional = userRepository.findById(idx)
         if(!optional.isPresent) throw UserNotFoundException()
         return optional.get()

@@ -14,7 +14,7 @@ class User constructor(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idx")
-    var idx: Int? = null,
+    var idx: Long? = null,
     @Column(name="user_id")
     var userId: String = "",
     @Column(name="user_pw")

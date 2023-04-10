@@ -1,22 +1,22 @@
 package com.daeyun.kotlinjava.dto.usertoken
 
-import com.querydsl.core.annotations.QueryProjection
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
-class CustomUserDetails @QueryProjection constructor (
-    private var idx: String,
-    private var id: String,
-    private var name: String,
-    private var accessToken: String,
-    private var authorities: Collection<GrantedAuthority>
+data class CustomUserDetails constructor (
+    private var username:String,
+    private var password:String,
+    private var roles: Collection<GrantedAuthority>? = null
 ) : UserDetails{
 
-    override fun getUsername(): String = idx
+    fun getIdx():Long {
+        return username.toLong()
+    }
+    override fun getUsername(): String? = username
 
-    override fun getPassword(): String = accessToken
+    override fun getPassword(): String = password
 
-    override fun getAuthorities(): Collection<GrantedAuthority> = authorities
+    override fun getAuthorities(): Collection<GrantedAuthority>? = authorities
 
     override fun isEnabled(): Boolean = true
 

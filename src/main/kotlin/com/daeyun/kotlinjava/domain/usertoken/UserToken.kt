@@ -8,7 +8,7 @@ import javax.persistence.Table
 @Entity
 @Table(name="user_token")
 class UserToken constructor(
-    val userIdx: Long? = null,
     @Id
+    val userIdx: Long? = null,
     val userToken: String = "",
 ):BaseEntity()

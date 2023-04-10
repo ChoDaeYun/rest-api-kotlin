@@ -1,36 +1,46 @@
 package com.daeyun.kotlinjava.config.security
 
+import com.daeyun.kotlinjava.dto.usertoken.CustomUserDetails
 import com.daeyun.kotlinjava.service.UserDetailsService
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
+import java.nio.charset.StandardCharsets
 import java.util.*
 
 @Component
 class JwtTokenProvider(
-    @Value("\${jwt.secret}") private val secretKey: String,
+    @Value("\${jwt.secret}") private var secretKey: String,
     private val userDetailsService: UserDetailsService
 ) {
 
+    init {
+        secretKey = Base64.getEncoder().encodeToString(secretKey.toByteArray())
+    }
     companion object {
         private const val TOKEN_VALIDITY = 1000L * 60 * 180
         private const val TOKEN_PREFIX = "Bearer "
         private const val TOKEN_HEADER = "Authorization"
     }
 
-    fun createToken(userPk:String): String {
+    fun createToken(idx:Long): String {
         val now = Date()
         val validity = Date(now.time + TOKEN_VALIDITY)
-        val claims = Jwts.claims().setSubject(userPk)
-        claims["accessToken"] = userDetailsService.makeToken()
+        val token = userDetailsService.makeToken()
+        val claims = Jwts.claims().setSubject(idx.toString())
+        claims["password"] = token
+        claims["roles"] = listOf("ROLE_USER");
+        userDetailsService.updateToken(idx,token)
         return Jwts.builder()
+            .setHeaderParam("typ","JWT")
             .setClaims(claims)
             .setIssuedAt(now)
             .setExpiration(validity)
-            .signWith(Keys.hmacShaKeyFor(secretKey.toByteArray()))
+            .signWith(Keys.hmacShaKeyFor(secretKey.toByteArray(StandardCharsets.UTF_8)),SignatureAlgorithm.HS256)
             .compact()
     }
 

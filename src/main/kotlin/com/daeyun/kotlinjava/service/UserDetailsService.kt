@@ -1,5 +1,6 @@
 package com.daeyun.kotlinjava.service
 
+import com.daeyun.kotlinjava.domain.usertoken.UserToken
 import com.daeyun.kotlinjava.domain.usertoken.UserTokenRepository
 import com.daeyun.kotlinjava.dto.usertoken.CustomUserDetails
 import org.springframework.stereotype.Service
@@ -16,7 +17,12 @@ class UserDetailsService(
     }
 
     fun loadUserByUsername(accessToken:String) : CustomUserDetails? {
-//        tokenRepository.findByaAccessTokenToCustomUserDetails(accessToken)
+//        return tokenRepository.loadUserByUsername(accessToken)
         return null
+    }
+
+    fun updateToken(idx:Long , token:String){
+        var userToken:UserToken = UserToken(idx,token)
+        tokenRepository.save(userToken)
     }
 }
