@@ -38,4 +38,4 @@ DB Hikari 설정
 DB Master/Slave 및 여러 DB 연결 설정 
 CustomerUserDetails에 대한 데이터를 DB 가 아닌 레디스 로 변경 
 querydsl 다양한 쿼리 조건 
-LocalDataTime Json 아웃푼 포멧 변경 - yyyy-MM-dd HH:mm:ss
+LocalDataTime Json 아웃푼 포멧 변경 - yyyy-MM-dd HH:mm:ss ( 완료 )
