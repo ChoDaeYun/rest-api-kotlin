@@ -1,0 +1,156 @@
+{
+  "info": {
+    "_postman_id": "d267907f-e1a7-4221-8710-9a2034609513",
+    "name": "API 목록",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "2149611"
+  },
+  "item": [
+    {
+      "name": "\b회원추가",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\":\"id_test\",\n    \"pw\":\"pw_test\",\n    \"name\":\"name_test\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/user/create",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "user",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "회원 로그인",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\":\"id_test\",\n    \"pw\":\"pw_test\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/user/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "user",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "회원정보(이름)수정",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\":\"gogo\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/user/update/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "user",
+            "update",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "회원정보 조회",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicGFzc3dvcmQiOiJCcURVZ054c2RRVXcxajgzIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY4MTE4MTkyMCwiZXhwIjoxNjgxMTkyNzIwfQ.ThUfGtszwLHujpTlEu-hjkP1g0gjKP5Nq7SHcSjgxsk",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/user/get",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "user",
+            "get"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "토큰 인증및 재발급",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicGFzc3dvcmQiOiJybDVVNVk4bTZ5alVzQ2RTIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY4MTE4NTEyNSwiZXhwIjoxNjgxMTk1OTI1fQ.3zkjX5rDPh5ncjAVZAAYPkPrJYX3eFcc6ppW2lTCh-Q",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/token/validation",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "token",
+            "validation"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
