@@ -48,25 +48,26 @@ class JwtTokenProvider(
     // Jwt 토큰으로 인증 정보를 조회
     fun getAuthentication(token : String ) : Authentication?{
         try{
+            var accessToken: String = getAccessToken(token) ?: return null
+            var customUserDetails = userDetailsService.loadUserByUsername(accessToken)
+            return UsernamePasswordAuthenticationToken(customUserDetails,null,customUserDetails.authorities)
+        }catch (e:Exception){
+            return null
+        }
+    }
+
+    fun getAccessToken(token : String):String?{
+        return try{
             val claims: Claims = Jwts.parserBuilder()
                 .setSigningKey(Keys.hmacShaKeyFor(secretKey.toByteArray()))
                 .build()
                 .parseClaimsJws(token)
                 .body
-            var accessToken = claims.get("password").toString()
-            var customUserDetails = userDetailsService.loadUserByUsername(accessToken)
-            return UsernamePasswordAuthenticationToken(customUserDetails,null,customUserDetails.authorities)
+            claims["password"].toString()
         }catch (e:Exception){
-            println(e)
-            return null
+            null
         }
     }
-
-    fun getAuthoritiesFromToken(token: String): List<String> {
-        val claims = getClaimsFromToken(token)
-        return claims["authorities"] as List<String>
-    }
-
 
     fun validateToken(token: String): Boolean {
         return try {

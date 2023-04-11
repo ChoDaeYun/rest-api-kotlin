@@ -3,12 +3,14 @@ package com.daeyun.kotlinjava.dto.usertoken
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
+import java.time.LocalDateTime
 import java.util.stream.Collectors
 
 class CustomUserDetails constructor (
     private var username:String,
     private var password:String,
-    private var roles: Collection<GrantedAuthority>? = null
+    private var roles: Collection<GrantedAuthority>? = null,
+    var createDate : LocalDateTime
 ) : UserDetails{
 
     fun getIdx():Long {

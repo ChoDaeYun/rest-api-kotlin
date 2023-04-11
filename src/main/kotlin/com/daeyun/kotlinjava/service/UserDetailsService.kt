@@ -8,6 +8,7 @@ import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 
 @Service
@@ -27,7 +28,8 @@ class UserDetailsService(
         return CustomUserDetails(
             username = account!!.idx.toString(),
             password = account!!.token,
-            roles = roles
+            roles = roles,
+            createDate = account.createDate
         )
     }
 

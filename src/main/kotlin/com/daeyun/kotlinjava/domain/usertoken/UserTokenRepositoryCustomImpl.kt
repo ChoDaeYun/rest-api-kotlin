@@ -14,7 +14,7 @@ class UserTokenRepositoryCustomImpl(
         accessToken:String
     ): AccountRes? {
          return queryFactory.select(
-             QAccountRes(user.idx,user.userId,user.userName, userToken1.userToken)
+             QAccountRes(user.idx,user.userId,user.userName, userToken1.userToken, userToken1.createDate)
             )
             .from(userToken1)
             .leftJoin(user).on(user.idx.eq(userToken1.userIdx))

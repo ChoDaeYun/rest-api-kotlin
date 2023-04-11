@@ -17,11 +17,7 @@ class JwtAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider): O
         chain : FilterChain
     ) {
         val header = request.getHeader("Authorization")
-        if (header == null || !header.startsWith("Bearer ")) {
-            chain.doFilter(request, response)
-            return
-        }
-        val token = header.replace("Bearer ", "")
+        val token = jwtTokenProvider.resolveToken(header);
         // 유효한 토큰인지 확인합니다.
         if (token != null && jwtTokenProvider.validateToken(token)) {
 

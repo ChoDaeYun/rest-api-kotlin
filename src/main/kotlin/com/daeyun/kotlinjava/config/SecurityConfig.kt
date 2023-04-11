@@ -33,7 +33,7 @@ class SecurityConfig(
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt token으로 인증할것이므로 세션필요없으므로 생성안함.
             .and().authorizeHttpRequests()
             .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-            .antMatchers("/exception/**").permitAll()
+            .antMatchers("/exception/**","/token/validation").permitAll()
             .antMatchers("/user/login","/user/create").permitAll()
             .antMatchers("/user/**").hasRole("USER")
             .anyRequest().hasRole("USER")
