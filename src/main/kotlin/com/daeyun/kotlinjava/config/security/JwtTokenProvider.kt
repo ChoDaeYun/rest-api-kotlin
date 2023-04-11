@@ -7,6 +7,7 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
 import java.nio.charset.StandardCharsets
@@ -52,10 +53,11 @@ class JwtTokenProvider(
                 .build()
                 .parseClaimsJws(token)
                 .body
-            var accessToken = claims.get("accessToken").toString()
+            var accessToken = claims.get("password").toString()
             var customUserDetails = userDetailsService.loadUserByUsername(accessToken)
-            return null
+            return UsernamePasswordAuthenticationToken(customUserDetails,null,customUserDetails.authorities)
         }catch (e:Exception){
+            println(e)
             return null
         }
     }

@@ -1,9 +1,11 @@
 package com.daeyun.kotlinjava.dto.usertoken
 
 import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
+import java.util.stream.Collectors
 
-data class CustomUserDetails constructor (
+class CustomUserDetails constructor (
     private var username:String,
     private var password:String,
     private var roles: Collection<GrantedAuthority>? = null
@@ -16,7 +18,12 @@ data class CustomUserDetails constructor (
 
     override fun getPassword(): String = password
 
-    override fun getAuthorities(): Collection<GrantedAuthority>? = authorities
+    override fun getAuthorities(): Collection<GrantedAuthority?>? {
+        return roles!!.stream().map{
+            role -> SimpleGrantedAuthority("ROLE_${role}")
+        }.collect(Collectors.toSet())
+    }
+
 
     override fun isEnabled(): Boolean = true
 
